@@ -67,7 +67,7 @@ public class HashSetSortedKeyValuesExp {
 
 		TreeMap<Student, Integer> setList = new TreeMap<>(mapList);
 
-//		System.out.println(setList);
+		System.out.println(setList);
 		
 		
 	}
