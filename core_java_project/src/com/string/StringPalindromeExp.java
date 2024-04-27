@@ -4,12 +4,12 @@ public class StringPalindromeExp {
 
 	public static void main(String[] args) {
 
-		String original = "gee";
+		String original = "121";
 		boolean flag = checkPalindromString(original);
 		if (flag == true) {
-			System.out.println("String are palindrome");
+			System.out.println("String is palindrome");
 		} else {
-			System.out.println("String Not palindrome");
+			System.out.println("String Is Not palindrome");
 		}
 
 	}

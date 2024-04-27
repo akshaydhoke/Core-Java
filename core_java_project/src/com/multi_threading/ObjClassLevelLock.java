@@ -42,7 +42,7 @@ public class ObjClassLevelLock {
 		ThreadClass4 obj2 = new ThreadClass4();
 		ThreadClass4 obj3 = new ThreadClass4();
 
-		Thread t1 = new Thread(obj1);
+		Thread t1 = new Thread(new ThreadClass4());
 		Thread t2 = new Thread(obj1);
 		Thread t3 = new Thread(obj1);
 

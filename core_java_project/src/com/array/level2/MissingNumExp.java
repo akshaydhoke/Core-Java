@@ -6,11 +6,11 @@ import java.util.Arrays;
 public class MissingNumExp {
 
 	public static void main(String[] args) {
-		
+
 //	int total= (n+1)*(n+2)/2;
 
 //		int arr[] = { 1, 3, 7, 5, 5, 6, 2 };
-		int arr [] = new int[]{1,2,3,5,6,7};
+		int arr[] = new int[] { 1, 2, 3, 5, 6, 7 };
 
 		int n = arr.length;
 
@@ -19,14 +19,13 @@ public class MissingNumExp {
 
 // way2 :
 //		getMissingNo2(arr, n);
-		
+
 // way3 : Using Java8
 		getMissingNo3(arr, n);
 
 	}
 
-
-	//	Approach 2.1V (Using summation of first N natural numbers):
+	// Approach 2.1V (Using summation of first N natural numbers):
 //	{ 1, 3, 7, 5, 6, 2 }
 	public static int getMissingNo(int[] nums, int n) {
 		int sum = ((n + 1) * (n + 2)) / 2;
@@ -53,12 +52,28 @@ public class MissingNumExp {
 
 		return res;
 	}
-	
+
 	private static void getMissingNo3(int[] arr, int n) {
 		int maxVal = Arrays.stream(arr).max().getAsInt();
 		int expectedSum = maxVal * (maxVal + 1) / 2;
 		int actualSum = Arrays.stream(arr).sum();
-		System.out.println("Missing no : "+ (expectedSum-actualSum));
+		System.out.println("Missing no : " + (expectedSum - actualSum));
+	}
+	
+	/*
+	 * Commutative : A ⊕ B = B ⊕ A. This is clear from the definition of XOR: it
+	 * doesn't matter which way round you order the two inputs. Associative : A ⊕ ( B ⊕ C ) = ( A ⊕ B ) ⊕ C. ... 
+	 * Identity element : A ⊕ 0 = A. ... 
+	 * Self-inverse : A ⊕ A = 0.
+	 */
+	
+	public static int missingNo(int[] arr, int len) {
+		int xor = 0;
+
+		for (int element : arr) {
+			xor = xor ^ element;
+		}
+		return xor;
 	}
 
 }

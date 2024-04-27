@@ -2,11 +2,16 @@ package com.java8.coding;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.DoubleSummaryStatistics;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Optional;
+import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 // https://javaconceptoftheday.com/solving-real-time-queries-using-java-8-features-employee-management-system/
 
@@ -65,9 +70,11 @@ class Employee {
 }
 
 public class RealTimeExp {
-	public static void main(String[] args) {
+	
+	static List<Employee> employeeList = new ArrayList<Employee>();
 
-		List<Employee> employeeList = new ArrayList<Employee>();
+	 
+	public static void main(String[] args) {
 
 		employeeList.add(new Employee(111, "Jiya Brein", 32, "Female", "HR", 2011, 25000.0));
 		employeeList.add(new Employee(122, "Paul Niksui", 25, "Male", "Sales And Marketing", 2015, 13500.0));
@@ -92,6 +99,12 @@ public class RealTimeExp {
 
 		System.out.println("*************************************************************************************************");
 		
+	    Optional<Employee> emp = employeeList.stream().collect(Collectors.minBy(Comparator.comparing(Employee::getYearOfJoining)));
+	    System.out.println(emp.get().getId());
+	    
+		System.out.println("*************************************************************************************************");
+		
+		
 //		Query 3.1 : How many male and female employees are there in the organization?
 		
 		Map<String, Long>  maleAndFemaleList = employeeList.stream().collect(Collectors.groupingBy(i -> i.getGender(),HashMap::new,Collectors.counting()));
@@ -111,19 +124,104 @@ public class RealTimeExp {
 
 //		Query 3.4 : Get the details of highest paid employee in the organization?
 		
-		Optional<Employee> highestPaidEmployeeWrapper= employeeList.stream().collect(Collectors.maxBy(Comparator.comparingDouble(Employee::getSalary)));
-		System.out.println(highestPaidEmployeeWrapper);
+		double highestPaidEmployeeWrapper= employeeList.stream().collect(Collectors.maxBy(Comparator.comparingDouble(Employee::getSalary))).get().salary;
+		System.err.println(highestPaidEmployeeWrapper);
 
 //      Query 3.5 : Get the names of all employees who have joined after 2015?
 		
+		Stream<String> empsNames = employeeList.stream().filter(i -> i.getYearOfJoining()>2015).map(Employee::getName);
+//		System.out.println(Arrays.toString(empsNames.toArray()));
 
 //      Query 3.6 : Count the number of employees in each department?
 
-
+	    Map<String, Long> departmentCountList = employeeList.stream().collect(Collectors.groupingBy(Employee::getDepartment,Collectors.counting()));
+//        System.out.println(departmentCountList);
+		
 //		Query 3.7 : What is the average salary of each department?
 
+	    Map<String, Double> avgSalaryOfDepartments = employeeList.stream().collect(Collectors.groupingBy(Employee::getDepartment,Collectors.averagingDouble(Employee::getSalary)));
+//        System.out.println(avgSalaryOfDepartments);
+	    
+//	    Query 3.8 : Get the details of youngest male employee in the product development department?
+
+	    Optional<Employee> youngestMale =  employeeList.stream().filter(i -> i.getDepartment().equalsIgnoreCase("Product Development") && i.getGender().equals("Male")).collect(Collectors.minBy(Comparator.comparing(Employee::getAge)));
+//        System.out.println(youngestMale);
+	    
+//	    Query 3.9 : Who has the most working experience in the organization?
+       
+        Optional<Employee> mostWorkingExperience = employeeList.stream().sorted(Comparator.comparingInt(Employee::getYearOfJoining)).findFirst();
+//       System.out.println(mostWorkingExperience);
+
+//	    Query 3.10 : How many male and female employees are there in the sales and marketing team?
+       
+        Map<String, Long> countMaleFemaleEmployeesInSalesMarketing =  employeeList.stream().filter(i -> i.getDepartment().equalsIgnoreCase("sales and marketing")).collect(Collectors.groupingBy(Employee::getGender, Collectors.counting()));
+//       System.out.println(countMaleFemaleEmployeesInSalesMarketing);
 
 
-		
+//	    Query 3.11 : What is the average salary of male and female employees?
+        
+        Map<String, Double> avgSalaryOfGender = employeeList.stream().collect(Collectors.groupingBy(Employee::getGender, Collectors.averagingDouble(Employee::getSalary)));
+//        System.out.println(avgSalaryOfGender);
+
+//	    Query 3.12 : List down the names of all employees in each department?
+       
+	/*	Map<String, List<Employee>> employeeListByDepartment = employeeList.stream().collect(Collectors.groupingBy(Employee::getDepartment));
+
+		Set<Entry<String, List<Employee>>> entrySet = employeeListByDepartment.entrySet();
+
+		for (Entry<String, List<Employee>> entry : entrySet) {
+			System.out.println("--------------------------------------");
+
+			System.out.println("Employees In " + entry.getKey() + " : ");
+
+			System.out.println("--------------------------------------");
+
+			List<Employee> list = entry.getValue();
+
+			for (Employee e : list) {
+				System.out.println(e.getName());
+			}
+		}*/
+
+//	    Query 3.13 : What is the average salary and total salary of the whole organization?
+
+	DoubleSummaryStatistics summary = employeeList.stream().collect(Collectors.summarizingDouble(Employee::getSalary));
+	double avgSalary = summary.getAverage();
+	double totalSum = summary.getSum();
+//	System.out.println("Avg Salary :" + avgSalary + "    " + "Total Salary :" + totalSum);      
+        
+        
+//	    Query 3.14 : Separate the employees who are younger or equal to 25 years from those employees who are older than 25 years.
+	
+	Map<Boolean, List<Employee>> partitionEmployeesByAge = employeeList.stream().collect(Collectors.partitioningBy(i -> i.getAge() > 25));
+	Set<Entry<Boolean, List<Employee>>> elements = partitionEmployeesByAge.entrySet();
+
+	for (Entry<Boolean, List<Employee>> element : elements) {
+
+		if (element.getKey()) {
+			System.err.println("Employees older than 25 years :");
+		} else {
+			System.out.println("Employees younger than or equal to 25 years ");
+		}
+
+		List<Employee> list = element.getValue();
+
+		for (Employee e : list) {
+//			System.out.println(e.getName());
+		}
+	}
+
+//	    Query 3.15 : Who is the oldest employee in the organization? What is his age and which department he belongs to?
+
+	Optional<Employee> oldestEmployeeWrapper = employeeList.stream().max(Comparator.comparingInt(Employee::getAge));
+    
+	Employee oldestEmployee = oldestEmployeeWrapper.get();
+	         
+	System.out.println("Name : "+oldestEmployee.getName());
+	         
+	System.out.println("Age : "+oldestEmployee.getAge());
+	         
+	System.out.println("Department : "+oldestEmployee.getDepartment());
+
 	}
 }

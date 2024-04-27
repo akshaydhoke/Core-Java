@@ -1,10 +1,49 @@
+Intermediate Operations:
+filter(): Returns a stream consisting of elements that match the given predicate.
+map(): Returns a stream consisting of the results of applying a function to the elements.
+flatMap(): Returns a stream consisting of the results of replacing each element with the contents of a mapped stream.
+distinct(): Returns a stream consisting of distinct elements.
+sorted(): Returns a stream consisting of the elements sorted according to their natural order or a specified comparator.
+limit(): Returns a stream consisting of the first n elements.
+skip(): Returns a stream with the remaining elements after discarding the first n elements.
+peek(): Returns a stream consisting of the elements of the original stream, additionally performing the provided action on each element.
+
+Terminal Operations:
+forEach(): Performs an action for each element of the stream.
+toArray(): Collects the elements of the stream into an array.
+reduce(): Performs a reduction on the elements of the stream using an associative accumulation function and returns an Optional describing the reduced value.
+collect(): Performs a mutable reduction operation on the elements of the stream using a Collector.
+min(), max(): Returns the minimum or maximum element according to the provided comparator or natural order.
+count(): Returns the count of elements in the stream as a long.
+anyMatch(), allMatch(), noneMatch(): Returns whether any, all, or none of the elements match the given predicate.
+findFirst(), findAny(): Returns an Optional containing the first or any element of the stream, respectively.
+
+Short-circuiting Operations:
+anyMatch(), allMatch(), noneMatch(): Returns as soon as a result can be determined.
+findFirst(), findAny(): May return as soon as any element is found.
+Terminal Operations for Numeric Streams:
+sum(): Returns the sum of elements.
+average(): Returns the average of elements.
+summaryStatistics(): Returns a summary statistics object for the elements.
+
+Collections >>
+summarizingInt(), summarizingLong(), summarizingDouble(): Produces a summary statistics object for the elements of the stream (count, sum, min, average, max).
+
+int i = 15623;
+Integer sumOfDigits = Stream.of(String.valueOf(i).split("")).collect(Collectors.summingInt(Integer::parseInt));
+System.out.println(sumOfDigits);
+
+**************************************************************
+
+https://www.geeksforgeeks.org/how-to-find-duplicate-elements-in-a-stream-in-java/
 https://www.softwaretestinghelp.com/java-8-interview-questions/
 https://blog.devgenius.io/java-8-coding-and-programming-interview-questions-and-answers-62512c44f062
 
-https://www.geeksforgeeks.org/how-to-find-duplicate-elements-in-a-stream-in-java/
+https://javaconceptoftheday.com/java-8-interview-sample-coding-questions/
+https://javaconceptoftheday.com/solving-real-time-queries-using-java-8-features-employee-management-system/
 
 
-*** Most Imp for realworld problem ***
+***********************  Most Imp for realworld problem ********************
 Real time problem solving : 
 https://javaconceptoftheday.com/solving-real-time-queries-using-java-8-features-employee-management-system/
 
@@ -17,6 +56,25 @@ https://javaconceptoftheday.com/solving-real-time-queries-using-java-8-features-
 	    for(Entry<Boolean, List<Employee>> entry: es) {
 	    	System.out.println(entry.getValue());
 	    }
+	    
+++++++++++++++++++++++++++++++++++
+	    
+// Last element : skip() 
+int[] arr = {31, 12, 56, 15, 12, 75, 31, 89, 76};
+Arrays.stream(arr).skip(arr.length-1).forEach(i -> System.out.print(i +" "));
+
+++++++++++++++++++++++++++++++++++
+// limit()
+// How do you get three maximum numbers and three minimum numbers from the given list of integers?
+List<Integer> listOfIntegers = Arrays.asList(45, 12, 56, 15, 24, 75, 31, 89);
+listOfIntegers.stream().sorted().limit(3).forEach(System.out::println);
+
+++++++++++++++++++++++++++++++++++
+// peek()
+// It mainly to support debugging, where we want to see the elements as they flow past a certain point in a pipeline.
+
+		List<Integer> listOfIntegers = Arrays.asList(31, 56, 15, 12, 75, 31, 89);
+		listOfIntegers.stream().peek(System.out::println).toList();	  
 
 ++++++++++++++++++++++++++++++++++
 
@@ -38,6 +96,7 @@ System.out.println(intStream.getMax());
 +++++++++++++++++++++++++++++++++++
 2.1) Max element :
 Integer[] numbers = {3, 2, 2, 3, 7, 3, 5};
+
 Integer intVal = Arrays.stream(numbers).max(Comparator.naturalOrder()).get();
 System.out.println(intVal);
 
@@ -87,6 +146,9 @@ Map<Object, Long> words=Arrays.stream(listOfStr).collect(Collectors.groupingBy(i
 System.out.println(words);
 
 ===================================
+chars() : to convert Integer
+Stream.of(s1.split("")) : to convert string
+
 6) Stream of String to char
 String str = "Abcbdddefgg";
 Stream<Object> ss = str.chars().mapToObj(c -> (char)c);
@@ -95,6 +157,18 @@ Map<Object,Long> ss = str.chars().mapToObj(c -> (char)c).collect(Collectors.grou
 System.out.println(ss);
 
 ===================================
+6.1) Convert to single string element
+String s1 = "RaceCar";
+Stream.of(s1.split("")).map(String::toUpperCase).sorted().forEach(System.out::println);
+
+===================================
+6.2) Getting sum >>
+ int i = 15623;
+ long res =   Stream.of(String.valueOf(i).split("")).collect(Collectors.summarizingInt(Integer::parseInt)).getSum();
+ System.out.println(res);  
+
+===================================
+
 7) Given a String, find the first repeated character in it using Stream functions?
 
 String input = "Java articles are Awesome";
@@ -129,6 +203,12 @@ char ccc = input.chars().mapToObj(c -> (char)c).filter(c -> set.add(c)).findFirs
 System.out.println(ccc);
 
 ===================================
+
+		List<Integer> ints = Arrays.asList(1, 2, 2, 2, 3, 4, 4);
+		Entry<Integer, Long> map = ints.stream().collect(Collectors.groupingBy(i -> i, Collectors.counting())).entrySet().stream().sorted((e1,e2) -> (int)(e2.getValue()-e1.getValue())).findFirst().get();
+		System.out.println(map);
+
+===================================
 8) Given an integer array nums, return true if any value appears at least twice in the array, and return false if every element is distinct.
 
 public boolean containsDuplicate(int[] nums) {
@@ -155,7 +235,15 @@ Output: false
       Map<String,Long> namesCount = names
                                    .stream()
                        .filter(x->Collections.frequency(names, x)>1)
-                       .collect(Collectors.groupingBy
+                       .collect(Collectors.groupingB		List<Integer> listOfIntegers = new ArrayList<Integer>(Arrays.asList(31, 56, 15, 12, 75, 31, 89));
+
+		// Using Stream API without sorted() method
+		List<Integer> sortedList = new ArrayList<>();
+		while (!listOfIntegers.isEmpty()) {
+			Integer min = listOfIntegers.stream().min(Integer::compareTo).get();
+			sortedList.add(min);
+			listOfIntegers.remove(min);
+		}y
                        (Function.identity(), Collectors.counting()));
       System.out.println(namesCount);
       
@@ -173,5 +261,38 @@ Output: false
 
 	    String str = list.parallelStream().limit(3).sorted(Collections.reverseOrder()).collect(StringBuilder::new,(builder, curObj) -> builder.append(curObj.toUpperCase().toString()).reverse().append("~"),StringBuilder::append).toString();
 		System.out.println(str.substring(0,str.length()-1)); // 3EMAN~2EMAN~1EMAN
+		
+====================================
+		List<Integer> listOfIntegers = new ArrayList<Integer>(Arrays.asList(31, 56, 15, 12, 75, 31, 89));
+
+		// Using Stream API without sorted() method
+		List<Integer> sortedList = new ArrayList<>();
+		while (!listOfIntegers.isEmpty()) {
+			Integer min = listOfIntegers.stream().min(Integer::compareTo).get();
+			sortedList.add(min);
+			listOfIntegers.remove(min);
+		}
+
+====================================		
+Print duplicate elements with indexes.
+		
+ long num = 345673477;
+        String numStr = Long.toString(num);
+        int[] digits = Arrays.stream(numStr.split("")).mapToInt(Integer::parseInt).toArray();
+
+        // Grouping by digits and counting occurrences
+        Map<Integer, Long> frequencyMap = Arrays.stream(digits)
+                .boxed()
+                .collect(Collectors.groupingBy(digit -> digit, Collectors.counting()));
+
+        // Printing index and frequency of duplicate elements
+        frequencyMap.forEach((digit, frequency) -> {
+            if (frequency > 1) {
+                int firstIndex = numStr.indexOf(Integer.toString(digit));
+                System.out.println("Digit: " + digit + ", Frequency: " + frequency + ", Index: " + firstIndex);
+            }
+        });
+        
+-------------------------------------------
 		
 

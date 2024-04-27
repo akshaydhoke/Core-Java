@@ -17,6 +17,9 @@ class SuperClass implements Cloneable {
 
 public class Singleton extends SuperClass {
 	private static Singleton obj;
+	
+    // implement readResolve method
+//    protected Object readResolve() { return obj; }
 
 	private Singleton() { 
 

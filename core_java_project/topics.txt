@@ -44,7 +44,12 @@ https://www.tutorialspoint.com/Can-we-define-a-class-inside-a-Java-interface
 
 ------------------------------- Multi-treading concepts---------------------------------------------------
 https://www.interviewbit.com/multithreading-interview-questions/
+
 https://javarevisited.blogspot.com/2014/07/top-50-java-multithreading-interview-questions-answers.html#axzz7zmYXPL3I
+
+>> Object level and Class level locks in Java : 
+https://www.geeksforgeeks.org/object-level-class-level-lock-java/
+
 
 -------------------------------- MicroServices ---------------------------------------
 1) Employee and Address services example using RestTemplate : 
@@ -85,5 +90,24 @@ https://www.javaguides.net/2022/03/spring-boot-unit-testing-crud-rest-api-with-j
 InterviewBit >>
 Multi-threading
 OOPS
+
+Interfaces[default,static explanation]>> 
+https://www.digitalocean.com/community/tutorials/java-8-interface-changes-static-method-default-method
+
+------------------------------------------------
+
+java.util.concurrent Package >> 
+
+https://www.geeksforgeeks.org/java-util-concurrent-package/
+https://javarevisited.blogspot.com/2013/02/concurrent-collections-from-jdk-56-java-example-tutorial.html#axzz8WQU9hLW8
+
+https://www.geeksforgeeks.org/difference-traditional-collections-concurrent-collections-java/
+https://www.geeksforgeeks.org/concurrenthashmap-in-java/
+https://www.geeksforgeeks.org/how-does-concurrenthashmap-achieve-thread-safety-in-java/
+https://www.geeksforgeeks.org/fail-fast-fail-safe-iterators-java/
+https://www.geeksforgeeks.org/copyonwritearrayset-in-java/
+
+---------------------- DP Interviews -------------------
+https://www.geeksforgeeks.org/top-design-patterns-interview-questions/?ref=lbp
 
 
