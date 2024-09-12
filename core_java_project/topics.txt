@@ -4,15 +4,70 @@ https://jobs4times.com/
 # New features from java8 to java17v:
 https://reflectoring.io/java-release-notes/
 
+JP Morgan Chase Interview Experience for Java Developer :
+https://www.geeksforgeeks.org/jp-morgan-chase-interview-experience-for-java-developer/?ref=ml_lbp
+
+-------------------------------- SpringBoot ---------------------------------------
+
+https://talentedge.com/articles/spring-boot-interview-questions-10-years-experience/
+
+#File handing in SpringBoot >>
+https://www.geeksforgeeks.org/spring-boot-file-handling/
+https://www.geeksforgeeks.org/upload-multiple-files-in-spring-boot-using-jpa-thymeleaf-multipart/?ref=lbp
+
+Exception Handling : 
+https://www.geeksforgeeks.org/exception-handling-in-spring-boot/
+
+Spring Boot Actuator : 
+https://www.geeksforgeeks.org/spring-boot-actuator/
+
+Spring Boot – Caching : 
+https://www.geeksforgeeks.org/spring-boot-caching/
+
+Spring Boot – Spring Data JPA : 
+https://www.geeksforgeeks.org/spring-boot-spring-data-jpa/
+
+Configuring Store Procedure in Spring Boot Application :
+https://www.geeksforgeeks.org/configuring-store-procedure-in-spring-boot-application/
+
+Spring Boot Batch Processing Using Spring Data JPA to CSV File : 
+https://www.geeksforgeeks.org/spring-boot-batch-processing-using-spring-data-jpa-to-csv-file/
+
+Authentication and Authorization in Spring Boot 3.0 with Spring Security : 
+https://www.geeksforgeeks.org/authentication-and-authorization-in-spring-boot-3-0-with-spring-security/
+
+Spring Boot 3.0 – JWT Authentication with Spring Security using MySQL Database : 
+https://www.geeksforgeeks.org/spring-boot-3-0-jwt-authentication-with-spring-security-using-mysql-database/
+
+Microservices Communication with Apache Kafka in Spring Boot : 
+https://www.geeksforgeeks.org/microservices-communication-with-apache-kafka-in-spring-boot/
+
+Spring Boot – File Handling
+https://www.geeksforgeeks.org/spring-boot-file-handling/
+
+#SpringBoot Actuators >> 
+https://www.geeksforgeeks.org/spring-boot-actuator/
+Chatgpt :: Explain springBoot Actuators
+
+----------------------------------- Java 8 ----------------------------------------------
+
+Java 8 Stream Tutorial: 
+https://www.geeksforgeeks.org/java-8-stream-tutorial/
 
 # Stream Api :
-
+https://www.interviewbit.com/java-8-interview-questions/#features-of-java8
 https://java-8-tips.readthedocs.io/en/stable/streamsapi.html
-
 https://www.baeldung.com/java-8-streams
 
 // flatMap >>
 https://www.geeksforgeeks.org/stream-flatmap-java-examples/
+
+// Java9 Collectors: flatmapping, filtering
+https://www.tutorialspoint.com/importance-of-the-collectors-filtering-method-in-java-9
+https://www.tutorialspoint.com/importance-of-collectors-flatmapping-method-in-java-9
+
+// takewhile & dropwhile >> 
+https://dzone.com/articles/exploring-takewhile-and-dropwhile-in-java
 
 // Files >>
 https://mkyong.com/java8/java-8-stream-read-a-file-line-by-line/
@@ -52,6 +107,63 @@ https://www.geeksforgeeks.org/object-level-class-level-lock-java/
 
 
 -------------------------------- MicroServices ---------------------------------------
+
+https://www.geeksforgeeks.org/microservices-interview-questions/
+https://www.turing.com/interview-questions/microservices#basic-microservices-interview-questions-and-answers
+
+
+Different Ways to Establish Communication Between Spring Microservices:
+https://www.geeksforgeeks.org/different-ways-to-establish-communication-between-spring-microservices/?ref=ml_lbp
+https://www.geeksforgeeks.org/spring-boot-microservices-communication-using-resttemplate-with-example/?ref=ml_lbp
+https://www.geeksforgeeks.org/spring-boot-microservices-communication-using-webclient-with-example/?ref=ml_lbp
+https://www.geeksforgeeks.org/spring-boot-microservices-communication-using-feignclient-with-example/?ref=ml_lbp
+https://www.geeksforgeeks.org/load-balancing-for-websockets-in-spring-boot/?ref=ml_lbp
+
+
+Java Spring Boot Microservices – Developing Service Discovery: 
+https://www.geeksforgeeks.org/java-spring-boot-microservices-developing-service-discovery/?ref=ml_lbp
+
+Service Discovery and Service Registry in Microservices : 
+https://www.geeksforgeeks.org/service-discovery-and-service-registry-in-microservices/?ref=ml_lbp
+https://www.geeksforgeeks.org/client-side-service-discovery-in-microservices/?ref=ml_lbp
+https://www.geeksforgeeks.org/server-side-service-discovery-in-microservices/?ref=ml_lbp
+
+Load Balancing in Spring Boot Microservices :
+https://www.geeksforgeeks.org/load-balancing-in-spring-boot-microservices/?ref=ml_lbp
+https://www.geeksforgeeks.org/spring-cloud-client-side-load-balancer/?ref=ml_lbp
+https://www.geeksforgeeks.org/spring-cloud-server-side-load-balancer/?ref=ml_lbp
+https://www.geeksforgeeks.org/java-spring-boot-microservices-client-side-load-balancing-with-spring-cloud-loadbalancer/?ref=ml_lbp
+
+Spring Boot Microservices – Load Balancing using Netflix’s Ribbon : 
+https://www.geeksforgeeks.org/spring-cloud-client-side-load-balancing-with-ribbon/?ref=ml_lbp
+
+Java Spring Boot Microservices – Integration of Eureka, Feign & Spring Cloud Load Balancer :
+https://www.geeksforgeeks.org/java-spring-boot-microservices-integration-of-eureka-feign-spring-cloud-load-balancer/?ref=ml_lbp
+
+Debugging Eureka Issues in Spring Boot Microservices
+https://www.geeksforgeeks.org/debugging-eureka-issues-in-spring-boot-micoservices/?ref=ml_lbp
+
+Auto-scalling SB : 
+https://www.geeksforgeeks.org/auto-scaling-microservices-with-eureka-and-spring-boot/?ref=ml_lbp
+
+Introduction to Messaging Queues in Spring Boot Microservices : 
+https://www.geeksforgeeks.org/introduction-to-messaging-queues-in-spring-boot-microservices/?ref=ml_lbp
+
+Microservices Communication with Apache Kafka in Spring Boot:
+https://www.geeksforgeeks.org/microservices-communication-with-apache-kafka-in-spring-boot/?ref=ml_lbp
+
+
+Top 10 Microservices Patterns That Every Developer Should Know :
+https://www.geeksforgeeks.org/top-microservices-patterns/
+
+What Design patterns in Microservices :
+https://www.geeksforgeeks.org/what-is-circuit-breaker-pattern-in-microservices/?ref=ml_lbp
+https://www.geeksforgeeks.org/resilient-microservices-design/?ref=lbp
+https://www.geeksforgeeks.org/cqrs-design-pattern-in-microservices/?ref=lbp
+
+Types of Microservices Testing : 
+https://www.geeksforgeeks.org/types-of-microservices-testing/?ref=lbp
+
 1) Employee and Address services example using RestTemplate : 
 https://www.geeksforgeeks.org/spring-boot-configure-a-resttemplate-with-resttemplatebuilder/?ref=ml_lbp
 
@@ -61,9 +173,15 @@ https://www.geeksforgeeks.org/how-to-use-modelmapper-in-spring-boot-with-example
 3) How to Set Context Path in Spring Boot Application?
 https://www.geeksforgeeks.org/how-to-set-context-path-in-spring-boot-application/?ref=ml_lbp
 
-4)
-
 ------------------------- Junit5----------------------
+
+https://www.geeksforgeeks.org/introduction-to-junit-5/
+https://www.geeksforgeeks.org/junit-5-how-to-write-parameterized-tests/?ref=ml_lbp
+https://pradeesh-kumar.medium.com/parameterized-test-in-junit-85e7daec677b
+https://github.com/thinkconstructive/rest-api-spring-boot-demo/tree/master
+https://www.geeksforgeeks.org/how-to-generate-code-coverage-report-with-jacoco-in-java-application/
+
+
 1) https://www.digitalocean.com/community/tutorials/junit5-tutorial
 
 0) JUnit 5 Annotations With Examples>>
@@ -93,6 +211,9 @@ OOPS
 
 Interfaces[default,static explanation]>> 
 https://www.digitalocean.com/community/tutorials/java-8-interface-changes-static-method-default-method
+
+----------------------- Angular ----------------
+https://github.com/Javabykiran-Angular/june_july_OJT_2022/tree/main
 
 ------------------------------------------------
 

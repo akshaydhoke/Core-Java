@@ -1,0 +1,279 @@
+https://www.geeksforgeeks.org/lambda-expressions-java-8/?ref=lbp
+
+Lamda Expression : Lambda Expressions in Java are the same as lambda functions which are the short block of code that accepts input as parameters and returns a resultant value. 
+
+interface FuncInterface
+{
+    void abstractFun(int x);
+}
+
+class Test
+{
+    public static void main(String args[])
+    {
+        FuncInterface fobj = (int x)->System.out.println(2*x);
+        fobj.abstractFun(5);
+    }
+}
+
+Java Lambda Expression with Collections ::
+public class Demo {
+    public static void main(String[] args) {
+        TreeSet<Integer> h = new TreeSet<Integer>((o1, o2) -> (o1 > o2) ? -1 : (o1 < o2) ? 1 : 0);
+        h.add(850);
+        h.add(15);
+        h.add(5);
+        System.out.println("Elements of the TreeSet after" + " sorting are: " + h); // 
+    }
+}
+
+*****************************************************************************
+https://www.geeksforgeeks.org/functional-interfaces-java/?ref=lbp
+
+FunctionalInterface :: A functional interface is an interface that contains only one abstract method. They can have only one functionality to exhibit.
+    Runnable –> This interface only contains the run() method.
+    Comparable –> This interface only contains the compareTo() method.
+    Callable –> This interface only contains the call() method.
+
+@FunctionalInterface
+interface Square {
+	int calculate(int x);
+}
+
+class Test {
+	public static void main(String args[])
+	{
+		int a = 5;
+		// lambda expression to define the calculate method
+		Square s = (int x) -> x * x;
+		int ans = s.calculate(a);
+		System.out.println(ans);
+	}
+}
+
+Java SE 8 included four main kinds of functional interfaces which can be applied in multiple situations as mentioned below:
+    Consumer
+    Predicate
+    Function 
+    Supplier
+Amidst the previous four interfaces, the first three interfaces,i.e., Consumer, Predicate, and Function, likewise have additions that are provided beneath – 
+    Consumer -> Bi-Consumer
+    Predicate -> Bi-Predicate
+    Function -> Bi-Function, Unary Operator, Binary Operator 
+
+
+Consumer : The consumer interface of the functional interface is the one that accepts only one argument or a gentrified argument. The consumer interface has no return value. It returns nothing
+Consumer : void accept(T t)   /  void accept(T t, U u) / default Consumer <T> andThen(Consumer<? super T> after)
+
+public class Main {
+    public static void main(String args[])
+    {
+        // Consumer to display a number
+        Consumer<Integer> display = a -> System.out.println(a);
+ 
+        // Implement display using accept()
+        display.accept(10);
+ 
+    }
+}
+
+==========================================
+Supplier : This method does not take in any argument but produces a value of  given type. 
+Supplier :  T get()
+  
+public class Main { 
+    public static void main(String args[]) 
+    { 
+  
+        // This function returns a random value. 
+        Supplier<Double> randomValue = () -> Math.random(); 
+  
+        // Print the random value using get() 
+        System.out.println(randomValue.get()); 
+    } 
+} 
+
+==========================================
+Predicate :  It represents a boolean-valued function that takes an input and returns true or false based on some condition.
+Predicates are commonly used for filtering collections or testing elements against certain criteria.
+
+Predicate : test(T t)  / default Predicate or(Predicate other)  /  default Predicate negate() / default Predicate and(Predicate other) / static  Predicate isEqual(Object targetRef)
+
+import java.util.function.Predicate; 
+public class PredicateInterfaceExample1 { 
+    public static void main(String[] args) 
+    { 
+        // Creating predicate 
+        Predicate<Integer> lesserthan = i -> (i < 18);  
+  
+        // Calling Predicate method 
+        System.out.println(lesserthan.test(10));  
+    } 
+} 
+
+==========================================
+Function :  It represents a function which takes in one argument and produces a result
+Methods >> 
+apply()  :  R apply(T t)
+andThen() : 
+compose()
+identity()
+
+public class GFG {
+ 
+    // Main driver method
+    public static void main(String args[])
+    {
+        // Function which takes in a number
+        // and returns half of it
+        Function<Integer, Double> half = a -> a / 2.0;
+ 
+        // Applying the function to get the result
+        System.out.println(half.apply(10));
+    }
+}
+
+*****************************************************************************
+https://www.geeksforgeeks.org/method-references-in-java-with-examples/?ref=lbp
+
+Method References :: A method reference is the shorthand syntax for a lambda expression that contains just one method call.
+
+A. To refer to a method in an object 
+Object :: methodName 
+list.forEach(System.out::println);  
+
+There are four type method references that are as follows:
+Static Method Reference.
+Class::staticMethod  
+    
+Instance Method Reference of a particular object.
+obj::instanceMethod 
+    
+Instance Method Reference of an arbitrary object of a particular type.
+ObjectType::instanceMethod 
+    
+Constructor Reference.
+ClassName::new 
+
+public class GFG {
+     public static void main(String[] args){
+        // Creating an empty ArrayList of user defined type
+        // List of person
+        List<String> personList = new ArrayList<>();
+        personList.add("vicky");
+        personList.add("poonam");
+        personList.add("sachin");
+ 
+        // Method reference to String type
+        Collections.sort(personList, String::compareToIgnoreCase);
+ 
+        // Printing the elements(names) on console
+        personList.forEach(System.out::println); //
+poonam
+sachin
+vicky
+    }
+}
+*****************************************************************************
+https://www.geeksforgeeks.org/java-8-optional-class/?ref=lbp
+
+Optional Class : It is a public final class and used to deal with NullPointerException in Java application.
+Java 8 has introduced a new class Optional in java.util package. It can help in writing a neat code without using too many null checks.
+
+public class OptionalDemo {
+    public static void main(String[] args) {
+        String[] words = new String[10];
+        
+          Optional<String> checkNull = Optional.ofNullable(words[5]);
+        
+          if (checkNull.isPresent()) {
+            String word = words[5].toLowerCase();
+            System.out.print(word);
+        }else
+            System.out.println("word is null");
+   }
+}
+
+Here are some key methods with brief explanations:
+
+of(T value): Returns an Optional with the specified non-null value. Throws NullPointerException if the value is null.
+
+ofNullable(T value): Returns an Optional describing the specified value if non-null, otherwise returns an empty Optional.
+
+empty(): Returns an empty Optional.
+
+isPresent(): Checks if the Optional contains a non-null value. Returns true if a value is present, otherwise false.
+
+ifPresent(Consumer<? super T> action): Executes the given action if a value is present. The action is a Consumer that processes the value.
+
+get(): Retrieves the value if present. Throws NoSuchElementException if no value is present.
+
+orElse(T other): Returns the value if present, otherwise returns the specified other value.
+
+orElseGet(Supplier<? extends T> other): Returns the value if present, otherwise returns the result of the specified Supplier.
+
+orElseThrow(): Returns the value if present, otherwise throws NoSuchElementException.
+
+map(Function<? super T, ? extends U> mapper): Applies the provided mapping function if a value is present, returns an Optional of the result.
+
+flatMap(Function<? super T, Optional<U>> mapper): Applies the provided mapping function if a value is present, returns an Optional containing the result of applying the function.
+
+*****************************************************************************
+https://www.geeksforgeeks.org/new-date-time-api-java8/?ref=lbp
+
+New Date-Time API : 
+
+import java.time.*;
+
+Immutability and Thread Safety:
+Old API: java.util.Date and java.util.Calendar are mutable and not thread-safe.
+New API: Classes in java.time (e.g LocalDate, LocalTime, LocalDateTime) are immutable and thread-safe, ensuring that their instances safe to use in concurrent environments.
+
+Time-zone Handling:
+Old API: Handling time zones with java.util.Date and java.util.Calendar is cumbersome and error-prone, often requiring manual adjustments and conversions.
+New API: The new API includes robust support for time zones through classes like ZonedDateTime and ZoneId. Time zone conversions and calculations are handled more naturally, making it easier to work with different time zones.
+
+Exp: 
+
+LocalDate/LocalTime and LocalDateTime API : Use it when time zones are NOT required.
+
+    LocalTime time = LocalTime.now(); // 20:52:39.954238
+    
+    LocalDateTime current = LocalDateTime.now(); // 2021-09-23T20:52:39.956909
+    
+    DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");  
+    String formatedDateTime = current.format(format); // 23-09-2021 20:52:39
+
+Zoned date-time API : Use it when time zones are to be considered
+
+    ZonedDateTime currentZone = ZonedDateTime.now(); 
+    ZoneId tokyo = ZoneId.of("Asia/Tokyo");
+    ZonedDateTime tokyoZone =currentZone.withZoneSameInstant(tokyo);
+    System.out.println("tokyo time zone is " + tokyoZone); // 2018-04-09T15:21:13.220+09:00[Asia/Tokyo]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

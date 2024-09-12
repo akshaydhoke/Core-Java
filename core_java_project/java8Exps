@@ -1,4 +1,5 @@
-Intermediate Operations:
+Intermediate Operations
+
 filter(): Returns a stream consisting of elements that match the given predicate.
 map(): Returns a stream consisting of the results of applying a function to the elements.
 flatMap(): Returns a stream consisting of the results of replacing each element with the contents of a mapped stream.
@@ -8,30 +9,28 @@ limit(): Returns a stream consisting of the first n elements.
 skip(): Returns a stream with the remaining elements after discarding the first n elements.
 peek(): Returns a stream consisting of the elements of the original stream, additionally performing the provided action on each element.
 
-Terminal Operations:
+Terminal Operations
+
 forEach(): Performs an action for each element of the stream.
 toArray(): Collects the elements of the stream into an array.
 reduce(): Performs a reduction on the elements of the stream using an associative accumulation function and returns an Optional describing the reduced value.
 collect(): Performs a mutable reduction operation on the elements of the stream using a Collector.
 min(), max(): Returns the minimum or maximum element according to the provided comparator or natural order.
 count(): Returns the count of elements in the stream as a long.
-anyMatch(), allMatch(), noneMatch(): Returns whether any, all, or none of the elements match the given predicate.
-findFirst(), findAny(): Returns an Optional containing the first or any element of the stream, respectively.
 
-Short-circuiting Operations:
+Short-circuiting Operations
+
 anyMatch(), allMatch(), noneMatch(): Returns as soon as a result can be determined.
 findFirst(), findAny(): May return as soon as any element is found.
-Terminal Operations for Numeric Streams:
+
+Terminal Operations for Numeric Streams
+
 sum(): Returns the sum of elements.
 average(): Returns the average of elements.
 summaryStatistics(): Returns a summary statistics object for the elements.
 
 Collections >>
 summarizingInt(), summarizingLong(), summarizingDouble(): Produces a summary statistics object for the elements of the stream (count, sum, min, average, max).
-
-int i = 15623;
-Integer sumOfDigits = Stream.of(String.valueOf(i).split("")).collect(Collectors.summingInt(Integer::parseInt));
-System.out.println(sumOfDigits);
 
 **************************************************************
 
@@ -41,7 +40,6 @@ https://blog.devgenius.io/java-8-coding-and-programming-interview-questions-and-
 
 https://javaconceptoftheday.com/java-8-interview-sample-coding-questions/
 https://javaconceptoftheday.com/solving-real-time-queries-using-java-8-features-employee-management-system/
-
 
 ***********************  Most Imp for realworld problem ********************
 Real time problem solving : 
@@ -56,6 +54,10 @@ https://javaconceptoftheday.com/solving-real-time-queries-using-java-8-features-
 	    for(Entry<Boolean, List<Employee>> entry: es) {
 	    	System.out.println(entry.getValue());
 	    }
+++++++++++++++++++++++++++++++++++
+int i = 15623;
+Integer sumOfDigits = Stream.of(String.valueOf(i).split("")).collect(Collectors.summingInt(Integer::parseInt));
+System.out.println(sumOfDigits);
 	    
 ++++++++++++++++++++++++++++++++++
 	    
@@ -293,6 +295,14 @@ Print duplicate elements with indexes.
             }
         });
         
--------------------------------------------
-		
+===================================
+In Java 8, the reduce method is a powerful feature of the Stream API that performs a reduction operation on the elements of a stream.
+It combines elements of the stream into a single result using a specified binary operation. This method is commonly used for aggregating or summarizing data.
+
+	    List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
+        int sum = numbers.stream().reduce(0, (a, b) -> a + b);
+        System.out.println(sum); // Output: 15	
+        
+===================================
+      
 

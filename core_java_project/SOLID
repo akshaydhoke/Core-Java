@@ -1,0 +1,110 @@
+The SOLID principles are a set of five design principles in object-oriented programming intended to make software designs more understandable, flexible, and maintainable.
+Let's go through each principle with an example:
+
+1) Single Responsibility Principle (SRP):
+This principle states that a class should have only one reason to change, meaning it should have only one responsibility.
+Example: Consider a UserService class responsible for both user authentication and user profile management. This violates the SRP. Instead, you should separate these concerns into different classes:
+	
+// UserService handles user authentication
+public class AuthenticationService {
+    public boolean authenticateUser(String username, String password) {
+        // Authentication logic
+    }
+}
+
+// UserProfileService handles user profile management
+public class UserProfileService {
+    public void updateProfile(User user) {
+        // Profile update logic
+    }
+}
+*********************************************************************************
+2) Open/Closed Principle (OCP):
+This principle states that classes should be open for extension but closed for modification. In other words, you should be able to add new functionality without altering existing code.
+Example: Suppose you have a Shape class with different subclasses representing geometric shapes. To add a new shape, you should extend the Shape class without modifying its existing behavior:
+
+abstract class Shape {
+    abstract double area();
+}
+
+class Rectangle extends Shape {
+    double length;
+    double width;
+    @Override
+    double area() {
+        return length * width;
+    }
+}
+
+class Circle extends Shape {
+    double radius;
+    @Override
+    double area() {
+        return Math.PI * radius * radius;
+    }
+}
+*********************************************************************************
+3) Liskov Substitution Principle (LSP):
+This principle states that objects of a superclass should be replaceable with objects of its subclasses without affecting the correctness of the program.
+Example: Consider a Bird superclass with a fly() method. According to LSP, any subclass of Bird, such as Sparrow or Penguin, should be able to implement fly() according to its own behavior:
+
+class Bird {
+    void fly() {
+        // Common fly behavior
+    }
+}
+
+class Sparrow extends Bird {
+    // Implements fly() for Sparrows
+}
+
+class Penguin extends Bird {
+    // Penguins cannot fly, so fly() method is overridden or not implemented
+}
+*********************************************************************************
+4) Interface Segregation Principle (ISP):
+This principle states that clients should not be forced to depend on interfaces they do not use. In other words, classes should not be forced to implement unnecessary methods.
+Example: Consider a Document interface with methods for both printing and scanning. If some classes only need to print and others only need to scan, you should split the interface into smaller, more specific interfaces:
+
+interface Printer {
+    void print();
+}
+
+interface Scanner {
+    void scan();
+}
+
+class SimplePrinter implements Printer {
+    // Implements print() method
+}
+
+class MultiFunctionDevice implements Printer, Scanner {
+    // Implements both print() and scan() methods
+}
+*********************************************************************************
+5) Dependency Inversion Principle (DIP):
+This principle states that high-level modules should not depend on low-level modules. Both should depend on abstractions. Additionally, abstractions should not depend on details; details should depend on abstractions.
+Example: Consider a PaymentService class that directly depends on a CreditCard class. According to DIP, PaymentService should depend on an abstraction (interface), not a concrete implementation:
+
+interface PaymentMethod {
+    void processPayment();
+}
+
+class CreditCard implements PaymentMethod {
+    @Override
+    public void processPayment() {
+        // Credit card payment logic
+    }
+}
+
+class PaymentService {
+    private PaymentMethod paymentMethod;
+
+    public PaymentService(PaymentMethod paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+
+    public void processPayment() {
+        paymentMethod.processPayment();
+    }
+}
