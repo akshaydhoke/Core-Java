@@ -15,11 +15,11 @@ public class ReverseStringExp {
 //		way1 : 
 		System.out.println("============ way1 ============");
 		
-//		for(int i=0;i<str.length();i++) {
-//			char ch=str.charAt(i);
-//			revString=ch+revString;
-//		}
-//		System.out.println(revString);
+		for(int i=0;i<str.length();i++) {
+			char ch=str.charAt(i);
+			revString=ch+revString;
+		}
+		System.out.println(revString);
 		
 		System.out.println("============= way2 ===========");
 		

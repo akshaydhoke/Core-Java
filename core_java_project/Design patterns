@@ -1,0 +1,531 @@
+Creational Patterns >>
+
+Singleton: Ensures a class has only one instance and provides a global point of access to it.
+Prototype: Creates new objects by copying an existing object, known as the prototype.
+Builder: Separates the construction of a complex object from its representation so that the same construction process can create different representations.
+Factory Method: Defines an interface for creating an object but allows subclasses to alter the type of objects that will be created.
+Abstract Factory: Provides an interface for creating families of related or dependent objects without specifying their concrete classes.
+
+1)Singleton Design Pattern :
+The Singleton Design Pattern ensures that a class has only one instance and provides a global point of access to that instance.
+It's useful when you need exactly one instance of a class to coordinate actions across the system.
+
+public class Singleton {
+    // The single instance of the class
+    private static Singleton instance;
+
+    // Private constructor to prevent instantiation
+    private Singleton() {}
+
+    // Public method to provide access to the instance
+    public static Singleton getInstance() {
+        if (instance == null) {
+            instance = new Singleton();
+        }
+        return instance;
+    }
+
+    // Example method
+    public void showMessage() {
+        System.out.println("Hello from Singleton!");
+    }
+}
+
+public class SingletonDemo {
+    public static void main(String[] args) {
+        // Get the single instance of Singleton
+        Singleton singleton = Singleton.getInstance();
+
+        // Call a method on the singleton instance
+        singleton.showMessage(); // Outputs: Hello from Singleton!
+    }
+}
+
+===============================================================================
+
+2) Prototype Design Pattern :
+The Prototype Design Pattern is a creational design pattern used to create objects by copying an existing object, known as the prototype. 
+The concept is to copy an existing object rather than creating a new instance from scratch, something that may include costly operations.
+This approach saves costly resources and time, especially when object creation is a heavy process.
+
+public interface Document extends Cloneable {
+    void print();
+    Document clone();
+}
+
+public class Report implements Document {
+    private String title;
+
+    public Report(String title) {
+        this.title = title;
+    }
+
+    @Override
+    public void print() {
+        System.out.println("Printing report: " + title);
+    }
+
+    @Override
+    public Document clone() {
+        try {
+            return (Document) super.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+}
+
+public class PrototypeDemo {
+    public static void main(String[] args) {
+        // Create a prototype document
+        Document originalReport = new Report("Annual Report");
+
+        // Clone the document
+        Document clonedReport = originalReport.clone();
+
+        // Print both documents
+        originalReport.print(); // Outputs: Printing report: Annual Report
+        clonedReport.print();  // Outputs: Printing report: Annual Report
+    }
+}
+
+===============================================================================
+
+3) Builder Design Pattern :
+
+The Builder Design Pattern is a creational pattern that provides a way to construct a complex object step-by-step. 
+It separates the construction of a complex object from its representation so that the same construction process can create different representations.
+
+public class Computer {
+    private String CPU;
+    private String RAM;
+    private String storage;
+
+    // Private constructor to be used by the builder
+    private Computer(ComputerBuilder builder) {
+        this.CPU = builder.CPU;
+        this.RAM = builder.RAM;
+        this.storage = builder.storage;
+    }
+
+    @Override
+    public String toString() {
+        return "Computer with " + CPU + " CPU, " + RAM + " RAM, and " + storage + " storage.";
+    }
+
+    // Static nested builder class
+    public static class ComputerBuilder {
+        private String CPU;
+        private String RAM;
+        private String storage;
+
+        public ComputerBuilder setCPU(String CPU) {
+            this.CPU = CPU;
+            return this;
+        }
+
+        public ComputerBuilder setRAM(String RAM) {
+            this.RAM = RAM;
+            return this;
+        }
+
+        public ComputerBuilder setStorage(String storage) {
+            this.storage = storage;
+            return this;
+        }
+
+        public Computer build() {
+            return new Computer(this);
+        }
+    }
+}
+
+public class BuilderPatternDemo {
+    public static void main(String[] args) {
+        // Build a computer using the builder
+        Computer computer = new Computer.ComputerBuilder()
+                                .setCPU("Intel Core i7")
+                                .setRAM("16GB")
+                                .setStorage("1TB SSD")
+                                .build();
+        
+        // Print the constructed computer
+        System.out.println(computer);
+    }
+}
+
+===============================================================================
+
+4)Factory Design Pattern :
+
+The Factory Design Pattern is a design pattern used to encapsulate the creation logic of objects.
+Instead of creating objects directly using their constructors, the Factory Pattern provides a method (or a set of methods) that handles the instantiation process.
+This pattern abstracts the process of creating objects, allowing subclasses or client code to focus on using objects rather than managing their creation.
+
+1. Define the Vehicle Interface:
+
+public interface Vehicle {
+    void drive();
+}
+
+2. Implement Concrete Classes for Different Vehicles:
+
+public class Car implements Vehicle {
+    @Override
+    public void drive() {
+        System.out.println("Driving a car.");
+    }
+}
+
+public class Bike implements Vehicle {
+    @Override
+    public void drive() {
+        System.out.println("Riding a bike.");
+    }
+}
+
+3. Define the VehicleFactory Class:
+
+public class VehicleFactory {
+    // Factory method to create vehicles
+    public static Vehicle getVehicle(String vehicleType) {
+        if (vehicleType == null) {
+            return null;
+        }
+        if (vehicleType.equalsIgnoreCase("CAR")) {
+            return new Car();
+        } else if (vehicleType.equalsIgnoreCase("BIKE")) {
+            return new Bike();
+        }
+        return null;
+    }
+}
+
+4. Demonstrate the Factory Pattern:
+
+public class FactoryPatternDemo {
+    public static void main(String[] args) {
+        // Get a Car object from the factory
+        Vehicle vehicle1 = VehicleFactory.getVehicle("CAR");
+        vehicle1.drive(); // Outputs: Driving a car.
+
+        // Get a Bike object from the factory
+        Vehicle vehicle2 = VehicleFactory.getVehicle("BIKE");
+        vehicle2.drive(); // Outputs: Riding a bike.
+    }
+}
+
+===============================================================================
+Structural Patterns:
+
+Adapter (or Wrapper): Allows an interface of an existing class to be used as another interface. It enables classes to work together that couldn't otherwise because of incompatible interfaces.
+Bridge: Decouples an abstraction from its implementation so that the two can vary independently.
+Composite: Composes objects into tree structures to represent part-whole hierarchies. It allows clients to treat individual objects and compositions of objects uniformly.
+Decorator: Adds new responsibilities to an object dynamically. It provides a flexible alternative to subclassing for extending functionality.
+Facade: Provides a unified interface to a set of interfaces in a subsystem. It defines a higher-level interface that makes the subsystem easier to use.
+Flyweight: Uses sharing to support a large number of fine-grained objects efficiently. It minimizes memory usage by sharing as much data as possible with similar objects.
+Proxy: Provides a surrogate or placeholder for another object to control access to it. It can add additional functionality such as lazy initialization, access control, or logging.
+
+
+1)Adapter (or Wrapper):
+ 
+The Adapter Design Pattern is a structural pattern that allows objects with incompatible interfaces to work together.
+It acts as a bridge between two incompatible interfaces, enabling them to communicate.
+
+We have a EuropeanSocket that provides electricity at 230V, and we want to use an AmericanDevice that requires 120V. We'll create an adapter to convert the voltage.
+
+Step 1: Define the Interfaces
+
+// EuropeanSocket interface
+interface EuropeanSocket {
+    String voltage();
+}
+
+// AmericanDevice interface
+interface AmericanDevice {
+    String voltage();
+}
+
+Step 2: Implement the Interfaces
+
+// Concrete implementation of EuropeanSocket
+class EuropeanSocketImpl implements EuropeanSocket {
+    @Override
+    public String voltage() {
+        return "230V";
+    }
+}
+
+// Concrete implementation of AmericanDevice
+class AmericanDeviceImpl implements AmericanDevice {
+    @Override
+    public String voltage() {
+        return "120V";
+    }
+}
+
+Step 3: Create the Adapter
+
+// Adapter class
+class SocketAdapter implements AmericanDevice {
+    private EuropeanSocket europeanSocket;
+
+    public SocketAdapter(EuropeanSocket europeanSocket) {
+        this.europeanSocket = europeanSocket;
+    }
+
+    @Override
+    public String voltage() {
+        // Convert voltage to be compatible with AmericanDevice
+        return "Converted " + europeanSocket.voltage() + " to 120V";
+    }
+}
+
+Step 4: Use the Adapter
+
+public class Main {
+    public static void main(String[] args) {
+        // Create a European socket
+        EuropeanSocket euroSocket = new EuropeanSocketImpl();
+        
+        // Create an adapter for the European socket
+        AmericanDevice adapter = new SocketAdapter(euroSocket);
+        
+        // Use the adapter to get the compatible voltage
+        System.out.println(adapter.voltage()); // Converted 230V to 120V
+    }
+}
+
+===============================================================================
+
+2) Proxy Design Pattern :
+
+The Proxy Design Pattern is a structural pattern that provides an object representing another object. A proxy acts as an intermediary to control access to the original object, allowing for additional functionality like lazy loading, access control, logging, etc.
+Key Concepts.
+
+Example Scenario
+Let’s say we have an Image interface for displaying images. We want to create a ProxyImage that delays the loading of the image until it's actually needed.
+
+Step 1: Define the Subject Interface
+
+interface Image {
+    void display();
+}
+
+Step 2: Implement the Real Subject Class
+
+class RealImage implements Image {
+    private String fileName;
+
+    public RealImage(String fileName) {
+        this.fileName = fileName;
+        loadImageFromDisk();  // Load image from disk
+    }
+
+    private void loadImageFromDisk() {
+        System.out.println("Loading " + fileName);
+    }
+
+    @Override
+    public void display() {
+        System.out.println("Displaying " + fileName);
+    }
+}
+
+Step 3: Implement the Proxy Class
+
+class ProxyImage implements Image {
+    private RealImage realImage;
+    private String fileName;
+
+    public ProxyImage(String fileName) {
+        this.fileName = fileName;
+    }
+
+    @Override
+    public void display() {
+        if (realImage == null) {
+            realImage = new RealImage(fileName);  // Load image only when needed
+        }
+        realImage.display();  // Delegate to the RealImage
+    }
+}
+
+Step 4: Use the Proxy in the Main Method
+
+public class Main {
+    public static void main(String[] args) {
+        Image image1 = new ProxyImage("photo1.jpg");
+        Image image2 = new ProxyImage("photo2.jpg");
+
+        // Image is loaded and displayed for the first time
+        image1.display();
+        
+        // Image is not loaded again; only displayed
+        image1.display();
+        
+        // Image is loaded and displayed for the first time
+        image2.display();
+    }
+}
+
+Output
+
+Loading photo1.jpg
+Displaying photo1.jpg
+Displaying photo1.jpg
+Loading photo2.jpg
+Displaying photo2.jpg
+
+===============================================================================
+Behavioral Patterns:
+
+Observer: Defines a dependency between objects so that when one object changes state, all its dependents are notified and updated automatically.
+Command: Encapsulates a request as an object, thereby allowing for parameterization of clients with queues, requests, and operations.
+Iterator: Provides a way to access the elements of an aggregate object sequentially without exposing its underlying representation.
+Visitor: Defines a new operation to a class without change. It lets you add further operations to objects without having to modify them.
+Chain of Responsibility: Passes a request along a chain of handlers. Each handler processes the request or passes it to the next handler in the chain.
+Interpreter: Defines a grammar for a language and provides an interpreter to interpret sentences of the language.
+Mediator: Defines an object that encapsulates how a set of objects interact. It promotes loose coupling by preventing objects from referring to each other explicitly.
+Memento: Captures and externalizes an object's internal state without violating encapsulation, so that the object can be restored to that state later.
+State: Allows an object to alter its behavior when its internal state changes. The object will appear to change its class.
+Strategy: Defines a family of algorithms, encapsulates each one, and makes them interchangeable. The strategy pattern lets the algorithm vary independently from clients that use it.
+Template Method: Defines the skeleton of an algorithm in a base class but lets subclasses override specific steps of the algorithm without changing its structure.
+
+1) Observer Design Pattern :
+
+The Observer Design Pattern is a behavioral pattern that defines a one-to-many dependency between objects, so that when one object (the subject) changes state,
+all its dependents (observers) are notified and updated automatically. This pattern is commonly used in event handling systems.
+
+Example Scenario
+
+Let's say we have a WeatherStation that notifies multiple displays (like a mobile app and a desktop app) whenever the temperature changes.
+
+Step 1: Define the Observer Interface
+
+interface Observer {
+    void update(float temperature);
+}
+
+Step 2: Define the Subject Interface
+
+interface Subject {
+    void registerObserver(Observer observer);
+    void removeObserver(Observer observer);
+    void notifyObservers();
+}
+
+Step 3: Implement the Concrete Subject Class
+
+import java.util.ArrayList;
+import java.util.List;
+
+class WeatherStation implements Subject {
+    private List<Observer> observers;
+    private float temperature;
+
+    public WeatherStation() {
+        observers = new ArrayList<>();
+    }
+
+    @Override
+    public void registerObserver(Observer observer) {
+        observers.add(observer);
+    }
+
+    @Override
+    public void removeObserver(Observer observer) {
+        observers.remove(observer);
+    }
+
+    @Override
+    public void notifyObservers() {
+        for (Observer observer : observers) {
+            observer.update(temperature);
+        }
+    }
+
+    public void setTemperature(float temperature) {
+        this.temperature = temperature;
+        notifyObservers(); // Notify all observers when the temperature changes
+    }
+}
+
+Step 4: Implement Concrete Observers
+
+// Concrete Observer class for Mobile Display
+
+class MobileDisplay implements Observer {
+    @Override
+    public void update(float temperature) {
+        System.out.println("Mobile Display: Temperature updated to " + temperature + "°C");
+    }
+}
+
+// Concrete Observer class for Desktop Display
+
+class DesktopDisplay implements Observer {
+    @Override
+    public void update(float temperature) {
+        System.out.println("Desktop Display: Temperature updated to " + temperature + "°C");
+    }
+}
+
+Step 5: Use the Observer in the Main Method
+
+public class Main {
+    public static void main(String[] args) {
+    
+        WeatherStation weatherStation = new WeatherStation();
+
+        MobileDisplay mobileDisplay = new MobileDisplay();
+        DesktopDisplay desktopDisplay = new DesktopDisplay();
+
+        // Register observers
+        weatherStation.registerObserver(mobileDisplay);
+        weatherStation.registerObserver(desktopDisplay);
+
+        // Change temperature and notify observers
+        weatherStation.setTemperature(25.0f);
+        weatherStation.setTemperature(30.0f);
+    }
+}
+
+Output
+
+Mobile Display: Temperature updated to 25.0°C
+Desktop Display: Temperature updated to 25.0°C
+Mobile Display: Temperature updated to 30.0°C
+Desktop Display: Temperature updated to 30.0°C
+
+===============================================================================
+
+2) 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

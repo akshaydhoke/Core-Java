@@ -27,7 +27,7 @@ public class TraceOutExp1 {
 
 		System.out.println("value :"+ initialized);
 		if (!initialized) {
-			for (int i = 0; i < 100; i++) {
+			for (int i = 0; i < 3; i++) {
                   sum=sum+i;
 			}
 			initialized=true;

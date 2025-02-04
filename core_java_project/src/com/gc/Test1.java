@@ -11,7 +11,7 @@ public class Test1 {
 		Test1 test1 = new Test1();
 		
 		test1.finalize();
-		test1.finalize();
+//		test1.finalize();
 		
 		test1 = null;
 //		string = null;

@@ -1,0 +1,34 @@
+1) Smallest subarray with sum greater than x
+
+Given a number x and an array of integers arr, find the smallest subarray with sum greater than the given value. If such a subarray do not exist return 0 in that case.
+
+Examples:
+
+Input: x = 51, arr[] = [1, 4, 45, 6, 0, 19]
+Output: 3
+Explanation: Minimum length subarray is [4, 45, 6]
+
+Input: x = 100, arr[] = [1, 10, 5, 2, 7]
+Output: 0
+Explanation: No subarray exist
+
+2) Find the median
+
+Given an array arr[] of integers, calculate the median.
+NOTE: Return the floor value of the median
+
+Examples:
+
+Input: arr[] = [90, 100, 78, 89, 67]
+Output: 89
+Explanation: After sorting the array middle element is the median 
+
+Input: arr[] = [56, 67, 30, 79]
+Output: 61
+Explanation: In case of even number of elements, average of two middle elements is the median. 
+
+Input: arr[] = [1,2]
+Output: 1
+Explanation: The average of both elements will result in 1.
+
+3) 

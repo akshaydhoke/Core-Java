@@ -41,8 +41,8 @@ public class JoinMethodExp {
 			MyThread2 t2 = new MyThread2();
 
 			t1.start();
-//			t1.join();
-			// t2.sStart();
+			t1.join();
+			 t2.start();
 
 			for (int i = 0; i < 5; i++) {
 				Thread.sleep(500);

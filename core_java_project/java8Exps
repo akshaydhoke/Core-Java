@@ -35,11 +35,11 @@ summarizingInt(), summarizingLong(), summarizingDouble(): Produces a summary sta
 **************************************************************
 
 https://www.geeksforgeeks.org/how-to-find-duplicate-elements-in-a-stream-in-java/
-https://www.softwaretestinghelp.com/java-8-interview-questions/
-https://blog.devgenius.io/java-8-coding-and-programming-interview-questions-and-answers-62512c44f062
-
 https://javaconceptoftheday.com/java-8-interview-sample-coding-questions/
 https://javaconceptoftheday.com/solving-real-time-queries-using-java-8-features-employee-management-system/
+
+https://www.softwaretestinghelp.com/java-8-interview-questions/
+https://blog.devgenius.io/java-8-coding-and-programming-interview-questions-and-answers-62512c44f062
 
 ***********************  Most Imp for realworld problem ********************
 Real time problem solving : 
@@ -113,7 +113,7 @@ System.out.println(intVal);
 // Here, the Comparator compares the strings based on their last characters and returns the maximum value accordingly The result is stored in variable MAX 
 String[] array = { "Geeks", "for", "GeeksforGeeks", "GeeksQuiz" }; 
 String maxString =  Arrays.stream(array).max((s1,s2)-> Character.compare(s1.charAt(s1.length()-1), s2.charAt(s2.length()-1))).get();
-System.out.println(maxString);
+System.out.println(maxString); // GeeksQuiz
 
 ===================================
 3) How to find duplicate elements in a Stream in Java
@@ -124,9 +124,23 @@ Set<Integer> set=new HashSet<>();
 	        
 List<Integer> list = Stream.of(arr1).filter(i -> !set.add(i)).toList();
 System.out.println(list);
++++++++++++++++++++++++++++++++++++
+
+Input: Stream = {5, 13, 4, 21, 13, 27, 2, 59, 59, 34}
+Output: [59, 13]
+
+stream.collect(Collectors.groupingBy(Function.identity(), Collectors.counting())) 
+            .entrySet() 
+            .stream() 
+            .filter(m -> m.getValue() > 1)   //Check if frequency > 1   for duplicate elements
+            .map(Map.Entry::getKey)    //Find such elements 
+            .collect(Collectors.toSet()); 
++++++++++++++++++++++++++++++++++++            
+            
+list.stream() .filter(i -> Collections.frequency(list, i) > 1) .collect(Collectors.toSet());             
 
 +++++++++++++++++++++++++++++++++++
-3.1) Remove duplicates from List
+Remove duplicates from List
 
 Set<Integer> intList = 	Stream.of(arr1).collect(Collectors.toSet());
 System.out.println(Arrays.toString(intList.toArray()));
@@ -260,11 +274,37 @@ Output: false
 11) o/p: 3EMAN~2EMAN~1EMAN
 
 		List<String> list=Arrays.asList("name1","name2","name3","name4");
+		
+		
+	  String res = list.stream().map(word -> new StringBuffer(word.toUpperCase()).reverse()).limit(3).sorted(Comparator.reverseOrder()).collect(Collectors.joining("~"));
+	  System.out.println(res);
+
+++++++++++++++++++++
 
 	    String str = list.parallelStream().limit(3).sorted(Collections.reverseOrder()).collect(StringBuilder::new,(builder, curObj) -> builder.append(curObj.toUpperCase().toString()).reverse().append("~"),StringBuilder::append).toString();
 		System.out.println(str.substring(0,str.length()-1)); // 3EMAN~2EMAN~1EMAN
 		
+		   String output = IntStream.range(0, list.size())
+           .mapToObj(i -> (list.size() - i) + "EMAN")
+           .collect(Collectors.joining("~"));
+		
 ====================================
+12) jOhn~pAul~gEorge~rIngo
+
+		List<String> names = Arrays.asList("john", "paul", "george", "ringo");
+
+	  	String res = names.stream().map(word -> word.substring(0, 1) + Character.toUpperCase(word.charAt(1)) + word.substring(2)).collect(Collectors.joining("~"));
+        System.out.println(res); // jOhn~pAul~gEorge~rIngo
+
+====================================
+13) swap first element in last and last to first
+
+		long num = 123456789;
+		Stream.of(String.valueOf(num)).map(n -> n.charAt(n.length() - 1) + n.substring(1, n.length() - 1) + n.charAt(0)).forEach(System.out::println);
+
+====================================
+14) Without sorted method ::
+
 		List<Integer> listOfIntegers = new ArrayList<Integer>(Arrays.asList(31, 56, 15, 12, 75, 31, 89));
 
 		// Using Stream API without sorted() method
@@ -303,6 +343,102 @@ It combines elements of the stream into a single result using a specified binary
         int sum = numbers.stream().reduce(0, (a, b) -> a + b);
         System.out.println(sum); // Output: 15	
         
+        Optional<Integer> min = numbers.stream().reduce((a, b) -> a < b ? a : b);
+        min.ifPresent(System.out::println); // 1        
+        
 ===================================
-      
+            int arr[] = { 1, 2, 2, 2, 2, 3, 4, 7, 8, 8 };
+    		
+            Map<Integer, Long> map =  Arrays.stream(arr).boxed().collect(Collectors.groupingBy(Function.identity(),Collectors.counting()));
+            map.entrySet().stream().forEach(i -> System.out.println(i.getKey() + " : "+ i.getValue()));  
+            
+===================================
+Parallel Stream:
+
+A parallel stream is a special kind of stream that processes data in parallel, which means that it can break the task into smaller chunks and execute them simultaneously on multiple threads. This is achieved using the ForkJoinPool (a framework designed for parallel programming in Java), which splits the data into several parts and processes each part on a separate thread.
+Key Points:
+
+Default Behavior: Streams are sequential by default, meaning the operations are executed one after another.
+Parallelism: A parallel stream enables parallel execution of operations on elements in the stream. It divides the workload among multiple threads and processes them concurrently.
+Performance: Parallel streams can significantly improve performance for large datasets and CPU-intensive operations. However, they may not be faster for smaller datasets due to overhead from managing parallel execution.
+
+Creating Parallel Streams:
+
+You can create a parallel stream by calling parallelStream() on a collection or by using the parallel() method on an existing stream.
+
+Example of Using Parallel Stream:
+
+In this example, we'll use a parallel stream to calculate the sum of squares of integers from 1 to 10,000.
+
+import java.util.*;
+import java.util.stream.*;
+
+public class ParallelStreamExample {
+    public static void main(String[] args) {
+        // Create a list of integers from 1 to 10,000
+        List<Integer> numbers = new ArrayList<>();
+        for (int i = 1; i <= 10000; i++) {
+            numbers.add(i);
+        }
+
+        // Sequential Stream: Sum of squares of numbers
+        long startTime = System.currentTimeMillis();
+        int sumSequential = numbers.stream()
+                                   .mapToInt(i -> i * i)
+                                   .sum();
+        long endTime = System.currentTimeMillis();
+        System.out.println("Sequential Stream Sum: " + sumSequential);
+        System.out.println("Sequential Stream Time: " + (endTime - startTime) + " ms");
+
+        // Parallel Stream: Sum of squares of numbers
+        startTime = System.currentTimeMillis();
+        int sumParallel = numbers.parallelStream()
+                                 .mapToInt(i -> i * i)
+                                 .sum();
+        endTime = System.currentTimeMillis();
+        System.out.println("Parallel Stream Sum: " + sumParallel);
+        System.out.println("Parallel Stream Time: " + (endTime - startTime) + " ms");
+    }
+}
+Output (Example):
+
+Sequential Stream Sum: 333383335000
+Sequential Stream Time: 50 ms
+Parallel Stream Sum: 333383335000
+Parallel Stream Time: 30 ms
+
+Note: The exact times can vary depending on the machine and the number of available CPU cores. The parallel stream may take less time than the sequential stream when the dataset is large and the operations are CPU-bound, but for smaller datasets, the parallelism overhead may result in a slower execution.
+Benefits of Parallel Streams:
+
+===================================
+
+What is the output of the following?
+
+public class Test {
+    public static void main(String[] args) {
+        List<String> list = Arrays.asList("apple", "banana", "orange", "grape");
+        Optional<String> longest = list.stream().max(Comparator.comparingInt(String::length));
+        longest.ifPresent(System.out::println);  // banana
+    }
+}
+
+===================================
+
+Reverse a String Without Using StringBuilder or StringBuffer
+
+        String str = "Hello";
+        char[] chars = str.toCharArray();
+        for (int i = 0; i < str.length() / 2; i++) {
+            char temp = chars[i];
+            chars[i] = chars[str.length() - i - 1];
+            chars[str.length() - i - 1] = temp;
+        }
+        System.out.println(new String(chars));
+
+===================================
+
+
+
+
+               
 

@@ -5,7 +5,14 @@ public class StringPalindromeExp {
 	public static void main(String[] args) {
 
 		String original = "121";
-		boolean flag = checkPalindromString(original);
+        String str = "abcba";
+		
+		
+//		boolean flag = checkPalindromString(original);
+		
+		boolean flag = isPalindrome(original);
+		
+		
 		if (flag == true) {
 			System.out.println("String is palindrome");
 		} else {
@@ -24,6 +31,22 @@ public class StringPalindromeExp {
 			return true;
 		}
 		return false;
+	}
+
+	static boolean isPalindrome(String str) {
+		if (str == null || str.length() == 0) {
+			return true;
+		}
+		str = str.toLowerCase();
+		for (int i = 0; i <= str.length() / 2; i++) {
+			char start = str.charAt(i);
+			char end = str.charAt(str.length() - 1 - i);
+
+			if (start != end) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 }

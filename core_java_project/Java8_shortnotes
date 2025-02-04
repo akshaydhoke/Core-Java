@@ -1,4 +1,6 @@
 https://www.geeksforgeeks.org/lambda-expressions-java-8/?ref=lbp
+https://www.geeksforgeeks.org/how-to-find-duplicate-elements-in-a-stream-in-java/
+https://javaconceptoftheday.com/java-8-interview-sample-coding-questions/
 
 Lamda Expression : Lambda Expressions in Java are the same as lambda functions which are the short block of code that accepts input as parameters and returns a resultant value. 
 
@@ -251,12 +253,101 @@ Zoned date-time API : Use it when time zones are to be considered
     ZonedDateTime tokyoZone =currentZone.withZoneSameInstant(tokyo);
     System.out.println("tokyo time zone is " + tokyoZone); // 2018-04-09T15:21:13.220+09:00[Asia/Tokyo]
 
+*****************************************************************************
+https://www.geeksforgeeks.org/java-8-stream-tutorial/
+
+Stream API
+
+If we want to represent a group of objects as a single entity then we should go for collection.
+But if we want to process objects from the collection then we should go for streams.
+
+Features of Java Stream :
+
+A stream is not a data structure instead it takes input from the Collections, Arrays, or I/O channels.
+Streams don’t change the original data structure, they only provide the result as per the pipelined methods.
+Each intermediate operation is lazily executed and returns a stream as a result, hence various intermediate operations can be pipelined.
+Terminal operations mark the end of the stream and return the result.
+
+Various Core Operations Over Streams :
+
+There are broadly 3 types of operations that are carried over streams namely as follows as depicted from the image shown above:
+
+1. Intermediate Operations:
+
+Intermediate operations transform a stream into another stream. Some common intermediate operations include:
+
+    filter(): Filters elements based on a specified condition.
+    map(): Transforms each element in a stream to another value.
+    sorted():  Sorts the elements of a stream.
+
+All three of them are discussed below as they go hand in hand in nearly most of the scenarios and to provide better understanding by using them later by implementing in our clean Java programs below. As we already have studied in the above example of which we are trying to filter processed objects can be interpreted as filter() operation operated over streams.
+2. Terminal Operations
+
+Terminal Operations are the operations that on execution return a final result as an absolute value.
+
+    collect(): It is used to return the result of the intermediate operations performed on the stream.
+    forEach(): It iterates all the elements in a stream. 
+    reduce(): It is used to reduce the elements of a stream to a single value.
+
+3. Short Circuit Operations
+
+Short-circuit operations provide performance benefits by avoiding unnecessary computations when the desired result can be obtained early. They are particularly useful when working with large or infinite streams.
+
+    anyMatch(): it checks the stream if it satisfies the given condition. 
+    findFirst(): it checks the element that matches a given condition and stops processing when it finds it.
+
+Note: They are lazy, meaning they are not executed until a terminal operation is invoked.
 
 
+Java 8 Stream – FAQs
+1. How to learn streams in Java 8?
 
+    To learn java streams effectivily you need to get you theory concepets as well as practical skills strong. for that first you need to make your concepts strong then make it in pratice. 
 
+        Grasp the fundamental concept of streams. 
+            What are streams? 
+            Why are they useful? 
+            How do they work?
+        Familiarize yourself with creating streams from diverse sources. 
+            How can you create a stream from an array, a collection, or a file?
+        Dive into intermediate operations. 
+            What are intermediate operations? 
+            How do they transform data?
+        Understand terminal operations. 
+            What are terminal operations? 
+            How do they produce final results or trigger actions on the stream?
+        Embrace the concept of lazy evaluation. 
+            How does lazy evaluation work? How does it optimize resource usage?
+        Practice chaining operations to create intricate data pipelines. 
+            How can you chain multiple operations together to create complex data pipelines?
+        Explore parallel processing. 
+            How can you use parallel processing to improve the performance of your streams?
+        Apply streams to real-world scenarios. 
+            Find situations where streams can simplify code and improve efficiency.
+        Utilize online resources, tutorials, and exercises.
+        Consider in-depth tutorials. If you want a comprehensive learning experience, consider taking an in-depth tutorial on streams.
 
+2. Why we use stream in Java 8?
 
+    Java streams offer a range of functionalities that significantly enhance their importance.
+
+        Efficient Data Processing: They don’t store the data themselves, but instead act as a way to process data from various DS.
+        Functional and Non-Destructive: Streams follow a functional programming approach.
+        Lazy Evaluation: which means they perform computations only when needed
+        Single Pass Processing: The elements in a stream are processed only once during its lifetime
+
+3. What is the best practice of Java streams?
+
+    Java Stream API is a powerful and flexible tool that can significantly simplify code for data processing tasks and here are some best pratices for using java streams.
+
+        Use primitive streams for better performance
+        Avoid nesting streams
+        use stream with immutable objects
+        Use filter() before map() to avoid unnecessary processing
+         Prefer method references over lambda expressions
+        Use distinct() to remove duplicates
+        Use sorted() with caution
+        Use lazy evaluation for better performance
 
 
 

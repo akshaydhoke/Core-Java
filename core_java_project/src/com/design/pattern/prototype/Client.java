@@ -3,6 +3,7 @@ package com.design.pattern.prototype;
 // https://www.geeksforgeeks.org/prototype-design-pattern/
 
 // Prototype Design Pattern :
+// The Prototype Design Pattern is a creational design pattern used to create objects by copying an existing object, known as the prototype. 
 // The concept is to copy an existing object rather than creating a new instance from scratch, something that may include costly operations.
 // This approach saves costly resources and time, especially when object creation is a heavy process.
 
